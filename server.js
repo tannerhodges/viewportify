@@ -113,27 +113,27 @@ server.route({
 
     var graph = new Graph({ id: 'the-id', url: JSON.parse(request.payload.data).name, data: request.payload.data });
     graph.id = shortId(graph._id); // give it a url freindly short id;
-   
+
     // Add the data to the database,
     // upload a thumbnail to S3
-    // redirect the user to the render page for the graph 
+    // redirect the user to the render page for the graph
     graph.save(function(err, graph){
       var imgData = request.payload.thumbnail.replace(/^data:image\/png;base64,/, "");
       var base64data = new Buffer(imgData, 'base64');
-      var s3bucket = new AWS.S3({params: {Bucket: bucket}});
+      // var s3bucket = new AWS.S3({params: {Bucket: bucket}});
       var data = {
         Key: graph.id + ".png",
         Body: base64data,
         ContentType: "image/png",
         Expires: 153792000 // 5 years
       };
-      s3bucket.putObject(data, function(err, data) {
-        if (err) {
-          console.log("Error uploading data: ", err);
-        } else {
-          console.log("Successfully uploaded data to myBucket/myKey");
-        }
-      });
+      // s3bucket.putObject(data, function(err, data) {
+      //   if (err) {
+      //     console.log("Error uploading data: ", err);
+      //   } else {
+      //     console.log("Successfully uploaded data to myBucket/myKey");
+      //   }
+      // });
       response.redirect('/graph/'+ graph.id);
     });
 
