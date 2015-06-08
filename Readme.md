@@ -6,10 +6,24 @@ http://viewportify.hawksworx.com
 
 ## Hosting
 
-This site runs on Heroku. Deploy with `git push heroku master`
+This site runs on Heroku. Deploy with `git push heroku master`.
 
-## Local development
+## Local Development
 
-- Requires a local MongoDB service to be running.
-- Install other requirements with `npm install`
-- To access the hreoku environment variables, run locally with `foreman start`
+```
+npm install   # Install project dependencies
+mongod        # Start your Mongo database
+foreman start # Run local server
+```
+
+View [localhost:5000](http://localhost:5000/) in your browser.
+
+### Dependencies
+
+- [Node]()
+- [MongoDB]()
+- [Foreman](http://ddollar.github.io/foreman/)
+
+### Resources
+
+- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
